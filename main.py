@@ -22,7 +22,7 @@ if __name__ == '__main__':
     state = True
     while True:
         state = not state
-        b.set_light(['Estancia1'], 'on', state)
-        #b.set_group('Planta Baja', 'on', state)
+        #b.set_light(['Estancia1'], 'on', state)
+        b.set_group('Comedor', 'on', state)
         sleep(3)
 
