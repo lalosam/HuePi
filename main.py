@@ -1,16 +1,28 @@
-# This is a sample Python script.
+# !/usr/bin/python
+from time import sleep
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from phue import Bridge
+import logging
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    logging.basicConfig()
+    b = Bridge('192.168.4.102')
+    # Uncomment this line to register the app (see below)
+    #b.connect()
+    # Change the light state
+    #b.set_light(1, 'on', False)
+    print(b.get_api()['lights'])
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    lights = b.lights
+
+    # Print light names
+    for l in lights:
+        print(l.name + ' - ' + str(l.light_id))
+
+    state = True
+    while True:
+        state = not state
+        b.set_light(['Estancia1'], 'on', state)
+        #b.set_group('Planta Baja', 'on', state)
+        sleep(3)
+
