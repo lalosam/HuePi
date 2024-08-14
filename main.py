@@ -3,6 +3,7 @@ from time import sleep
 
 from phue import Bridge
 import logging
+import random
 
 if __name__ == '__main__':
     logging.basicConfig()
@@ -20,9 +21,17 @@ if __name__ == '__main__':
         print(l.name + ' - ' + str(l.light_id))
 
     state = True
+
+    color1 = True
+
     while True:
         state = not state
         #b.set_light(['Estancia1'], 'on', state)
-        b.set_group('Comedor', 'on', state)
-        sleep(3)
+        if color1:
+            command = {'on': True, 'bri': 254, 'xy': [random.random(), random.random()]}
+        else:
+            command = {'on': True, 'bri': 254, 'xy': [random.random(), random.random()]}
+        color1 = not color1
+        b.set_group('Comedor', command)
+        sleep(1)
 
